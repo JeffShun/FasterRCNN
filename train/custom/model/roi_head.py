@@ -59,7 +59,7 @@ class ROIHead(nn.Module):
         # Get desired scale to pass to roi pooling function
         proposals = rpn_output['proposals']
         image_shape = image.shape[-2:]
-        proposal_roi_pool_feats = roi_align(feat, [proposals], output_size=self.pool_size, spatial_scale=self.spatial_scale, aligned=True)
+        proposal_roi_pool_feats = roi_align(feat, [proposals], output_size=self.pool_size, spatial_scale=self.spatial_scale, sampling_ratio=2, aligned=True)
         
         proposal_roi_pool_feats = proposal_roi_pool_feats.flatten(start_dim=1)
         box_fc_6 = F.relu(self.fc6(proposal_roi_pool_feats))
