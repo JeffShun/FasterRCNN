@@ -75,11 +75,11 @@ def torch2onnx(model_path, onnx_path):
             )
         print('✅ Model has been converted to ONNX!') 
 
-        """
-        torchvision.ops.roi_align的属性为coordinate_transformation_mode，默认值为"align_corners"，
-        而在低版本onnx中，该属性的值只能为"align_pytorch"，因此需要手动添加该属性。
-        """
-        patch_roi_align(onnx_path)
+        # """
+        # torchvision.ops.roi_align的属性为coordinate_transformation_mode，默认值为"align_corners"，
+        # 而在低版本onnx中，该属性的值只能为"align_pytorch"，因此需要手动添加该属性。
+        # """
+        # patch_roi_align(onnx_path)
 
         torch.cuda.empty_cache()
         onnx_model = onnx.load(onnx_path)  # load onnx model
